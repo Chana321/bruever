@@ -18,7 +18,7 @@
     }
    body {
   font-family: 'Prompt', sans-serif;
-  background: linear-gradient(to bottom, rgb(0, 1, 49) 0%, rgb(0, 1, 49) 350px, #ffffff 0px);
+   background: #ffffff;
   color: #1a1a1a;
   min-height: 100vh;
   overflow-x: hidden;
@@ -43,11 +43,15 @@
     /* --- Mobile Navigation --- */
     @media(max-width:768px){
       @media(max-width: 768px) {
-  body {
-    /* ปรับตัวเลข 350px ให้ลดลง เช่นเป็น 280px เพื่อให้สีขาวขยับสูงขึ้นมา */
-    /* หรือเพิ่มขึ้น เช่นเป็น 400px เพื่อให้สีน้ำเงินยาวลงมาครอบปุ่มกรอง */
-    background: linear-gradient(to bottom, rgb(0, 1, 49) 0%, rgb(0, 1, 49) 310px, #ffffff 0px) !important;
-  }
+  .hero {
+  width: 100%;
+  padding: 100px 0 40px;
+  text-align: center;
+  margin-bottom: 40px;
+  background: rgb(0, 1, 49);
+  border-radius: 0 0 5px 5px;
+  overflow: hidden; /* เพิ่มบรรทัดนี้ */
+}
 }
       .nav-container{padding:0 16px;}
       .logo-img{width:45px;height:45px;}
@@ -94,6 +98,8 @@
     .hero{
       width:100%;padding:100px 0 40px;
       text-align:center;margin-bottom:40px;
+       background: rgb(0, 1, 49); /* ย้าย bg มาไว้ที่ hero */
+      border-radius: 0 0 10px 10px;
       
     }
     .hero-sub{
@@ -124,7 +130,7 @@
 
     /* --- Content Header --- */
     .content-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
-    .sec-label{font-size:13px;font-weight:400;color:#fee086;display:block;}
+    .sec-label{font-size:13px;font-weight:400;color:var(--blue);display:block;}
     .sort-select{
       font-family:'Prompt',sans-serif;font-size:13px;padding:7px 12px;
       border:0px ;border-radius:5px;background:var(--blue);
@@ -146,33 +152,51 @@
   border: 1px solid #f0f0f0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
-    .card.visible{opacity:1;}
-   
-
-    .card-img{position:relative;height:190px;overflow:hidden;background:var(--blue-light);}
-    .card-img img{width:100%;height:100%;object-fit:cover;display:block;}
-    
-
-    .card-tag{position:absolute;top:11px;left:11px;font-size:11px;font-weight:500;padding:3px 10px;border-radius: 5px;}
-    .tag-house{background:var(--blue-light);color:var(--blue);}
-    .tag-landhouse{background:var(--blue-light);color:var(--blue);}
-    .tag-large-land{background:var(--blue-light);color:var(--blue);}
-
-    .card-body{padding:14px 16px 16px;}
-    .card-loc{font-size:11px;color:var(--gray);margin-bottom:5px;display:flex;align-items:center;gap:3px;}
-    .card-loc svg{width:10px;height:10px;flex-shrink:0;stroke:var(--gray);}
-    .card-name{font-size:14.5px;font-weight:600;color:#1a1a2e;margin-bottom:5px;line-height:1.35;}
-    .card-area{font-size:12px;color:var(--gray);margin-bottom:10px;}
-    .card-divider{border:none;border-top:1px solid #f3f4f6;margin:10px 0;}
-    .card-foot{display:flex;align-items:center;justify-content:space-between;}
-    .card-price{font-size:17px;font-weight:400;color:var(--blue);}
-    .card-price small{font-size:10px;font-weight:400;color:var(--gray);margin-left:2px;}
-    .card-btn{
-      font-family:'Prompt',sans-serif;font-size:12px;padding:6px 14px;
-      border-radius:3px; border:1px solid var(--border);color:var(--gray);
-      background:transparent;cursor:pointer;transition:all .15s;white-space:nowrap;
-    }
-    .card-btn:hover{background:var(--blue);color:#ffffff;}
+    .card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .35s ease, box-shadow 0.3s ease;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.card.visible { opacity: 1; }
+.card-img { position: relative; height: 190px; overflow: hidden; background: var(--blue-light); }
+.card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card-tag { position: absolute; top: 11px; left: 11px; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; }
+.tag-house{background:var(--blue-light);color:var(--blue);}
+    .tag-landhouse{background:var(--green-light);color:var(--green-dark);}
+    .tag-large-land{background:var(--yellow-light);color:var(--yellow-dark);}
+.card-body { padding: 16px 18px 18px; }
+.card-loc { font-size: 11px; color: var(--gray); margin-bottom: 5px; display: flex; align-items: center; gap: 4px; }
+.card-loc svg { width: 11px; height: 11px; flex-shrink: 0; }
+.card-name { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 6px; }
+.card-desc {
+  font-size: 12px;
+  color: var(--gray);
+  margin-bottom: 12px;
+  line-height: 1.55;
+  white-space: nowrap;      /* บรรทัดเดียว */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+.card-foot { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+.card-price { font-size: 18px; font-weight: 400; color: var(--blue); }
+.card-price small { font-size: 11px; font-weight: 400; color: var(--gray); margin-left: 3px; }
+.card-area { font-size: 12px; color: var(--gray); }
+.card-btn {
+  display: block; width: 100%; padding: 10px; text-align: center;
+  border-radius: 8px; border: 1px solid var(--border);
+  font-family: 'Prompt', sans-serif; font-size: 13px; color: var(--gray);
+  cursor: pointer; background: none;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.card-btn:hover { background: var(--blue); color: white; border-color: var(--blue); }
     .empty{grid-column:1/-1;text-align:center;padding:64px 24px;color:var(--gray);}
 
 footer {
@@ -347,7 +371,7 @@ footer {
     
     /* สไตล์สีน้ำเงินตามที่คุณต้องการ */
     
-    color: #fee086;
+    color:var(--blue);
     font-family: 'Prompt', sans-serif;
     font-size: 13px;
     cursor: pointer;
@@ -671,24 +695,24 @@ footer {
         return;
       }
 
-      grid.innerHTML = items.map(d => `
-        <div class="card" onclick="openDetail(${d._i})" onmouseenter="preloadGallery(${d._i})" ontouchstart="preloadGallery(${d._i})">
-          <div class="card-img">
-            <img src="${d.img}" alt="${d.title}" loading="lazy"/>
-            <div class="card-tag tag-${d.type}">${d.tag || typeMap[d.type]}</div>
-          </div>
-          <div class="card-body">
-            <div class="card-loc">${pinSVG} ${d.loc}</div>
-            <div class="card-name">${d.title}</div>
-            <div class="card-area">เนื้อที่ ${d.area}</div>
-            <hr class="card-divider">
-            <div class="card-foot">
-              <div class="card-price">${d.price}<small> บาท</small></div>
-              <button class="card-btn" onclick="event.stopPropagation();openDetail(${d._i})">ดูรายละเอียด</button>
-            </div>
-          </div>
-        </div>
-      `).join('');
+    grid.innerHTML = items.map(d => `
+  <div class="card" onclick="openDetail(${d._i})" onmouseenter="preloadGallery(${d._i})" ontouchstart="preloadGallery(${d._i})">
+    <div class="card-img">
+      <img src="${d.img}" alt="${d.title}" loading="lazy"/>
+      <div class="card-tag tag-${d.type}">${d.tag || typeMap[d.type]}</div>
+    </div>
+    <div class="card-body">
+      <div class="card-loc">${pinSVG} ${d.loc}</div>
+      <div class="card-name">${d.title}</div>
+      <div class="card-desc">${d.desc}</div>
+      <div class="card-foot">
+        <div class="card-price">${d.price}<small> บาท</small></div>
+        <div class="card-area">${d.area}</div>
+      </div>
+      <button class="card-btn" onclick="event.stopPropagation();openDetail(${d._i})">ดูรายละเอียด</button>
+    </div>
+  </div>
+`).join('');
 
       grid.querySelectorAll('.card').forEach(c => observer.observe(c));
     }
@@ -717,5 +741,43 @@ footer {
     document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => render(c.dataset.f)));
     render('all');
   </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
 </html>
