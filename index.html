@@ -34,8 +34,9 @@
     .logo-bottom{font-size:16px;font-weight:500;color:#d1a655;margin-top:-2px;}
     .nav-menu{display:flex;gap:8px;list-style:none;align-items:center;}
     .nav-menu a{text-decoration:none;color:#ffffff;font-size:14px;font-weight:300;padding:6px 16px;border-radius:30px;transition:all 0.2s ease;}
-    .nav-menu a.active{color:white;font-weight:600;}
-    .nav-menu a:hover:not(.active){color:var(--blue);background:#f8fafc;}
+    .nav-menu a.active{color:white;font-size: 15px;font-weight:100;}
+    .nav-menu a:hover:not(.active){color: #deb974;}
+  
     .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:5px;}
     .nav-toggle svg{width:28px;height:28px;stroke:white;}
     .mobile-exit-section{display:none;list-style:none;width:100%;margin-bottom:0;padding:0!important;}
@@ -380,7 +381,7 @@ footer {
     }
     .fab-options.show{visibility:visible;opacity:1;transform:translateY(0) scale(1);}
     .fab-main{
-      width:56px;height:56px;border-radius:50%;background:#f1f3f5;border:none;
+      width:56px;height:56px;border-radius:50%;background:white;border:none;
       box-shadow:0 4px 18px rgba(0,0,0,0.15);cursor:pointer;display:flex;
       align-items:center;justify-content:center;transition:all 0.3s ease;z-index:2;
       padding:0;overflow:hidden;outline:none;-webkit-tap-highlight-color:transparent;user-select:none;
@@ -394,8 +395,8 @@ footer {
     }
     .fab-mini:hover{transform:scale(1.1);}
     .fab-mini.line{background:#00b900;}
-    .fab-mini.tel{background:var(--blue-mid);}
-    .fab-mini.fb{background:#1877F2;}
+    .fab-mini.tel{background:var(--blue);}
+    .fab-mini.fb{background:#006eff;}
     @media(max-width:480px){
       .fab-wrapper{bottom:20px;right:20px;gap:8px;}
       .fab-main{width:45px;height:45px;}
@@ -445,6 +446,11 @@ footer {
     .nav-toggle,.btn-exit,.nav-menu a,.chip,.btn-cta,.card-btn,.fab-main,.fab-mini,.gal-btn,.modal-close{
       touch-action:manipulation;-webkit-tap-highlight-color:transparent;
     }
+
+    .scroll-top{position:fixed;bottom:25px;left:25px;width:42px;height:42px;border-radius:10px;background:rgb(0,1,49);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s,visibility .3s,transform .3s;z-index:9998;-webkit-tap-highlight-color:transparent;}
+.scroll-top.show{opacity:1;visibility:visible;transform:translateY(0);}
+.scroll-top svg{width:18px;height:18px;stroke:#ffffff;stroke-width:2.5;}
+@media(max-width:480px){.scroll-top{bottom:20px;left:20px;width:38px;height:38px;}}
   </style>
 </head>
 
@@ -583,10 +589,12 @@ footer {
         </a>
       </div>
       <button class="fab-main" id="fabMain" onclick="toggleFAB()" aria-label="ติดต่อเรา">
-        <img src="img/other/call.png" alt="Call Center">
+        <img src="img/other/call2.png" alt="Call Center">
       </button>
     </div>
   </div>
+
+
 
     <footer>
   <div class="footer-inner">
@@ -606,6 +614,12 @@ footer {
   </div>
 </footer>
 
+
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="กลับด้านบน">
+  <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+</body>
   <script>
     let galImages = [], galIndex = 0;
     let curFilter = 'all', curSort = 'default';
@@ -733,6 +747,9 @@ footer {
       });
     }, { threshold: 0.1 });
 
+
+    
+
     /* --- Sort --- */
     function applySort() { curSort = document.getElementById('sortSelect').value; render(); }
 
@@ -782,6 +799,9 @@ footer {
       grid.querySelectorAll('.card').forEach(c => observer.observe(c));
     }
 
+
+const scrollBtn=document.getElementById('scrollTopBtn');
+window.addEventListener('scroll',()=>{scrollBtn.classList.toggle('show',window.scrollY>3000);},{passive:true});
     /* --- Preload --- */
     const preloaded = new Set();
     function preloadGallery(idx) {
@@ -844,5 +864,5 @@ footer {
 	}
 	// ]]>
 </script>
-</body>
+
 </html>
