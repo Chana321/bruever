@@ -31,7 +31,7 @@
     .logo-text{display:flex;flex-direction:column;line-height:1.1;padding-top:4px;}
     .logo-img{width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0;}
     .logo-top{font-size:13px;font-weight:400;color:#f7f7f7;}
-    .logo-bottom{font-size:16px;font-weight:500;color:#deb974;margin-top:-2px;text-shadow: 0 0 6px rgba(255,255,255,0.3);}
+    .logo-bottom{font-size:16px;font-weight:500;color:#d1a655;margin-top:-2px;}
     .nav-menu{display:flex;gap:8px;list-style:none;align-items:center;}
     .nav-menu a{text-decoration:none;color:#ffffff;font-size:14px;font-weight:300;padding:6px 16px;border-radius:30px;transition:all 0.2s ease;}
     .nav-menu a.active{color:white;font-weight:600;}
@@ -39,6 +39,60 @@
     .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:5px;}
     .nav-toggle svg{width:28px;height:28px;stroke:white;}
     .mobile-exit-section{display:none;list-style:none;width:100%;margin-bottom:0;padding:0!important;}
+
+
+    .nav-toggle {
+  display: none; /* ซ่อนใน Desktop */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1002; /* ให้อยู่เหนือทุกอย่าง */
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hamburger-icon {
+  width: 24px;   /* ความกว้างไอคอน */
+  height: 16px;  /* ความสูงไอคอน */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end; /* ทำให้เส้นสั้นชิดขวา */
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 2px;
+  background-color: white; /* เริ่มต้นเป็นสีขาว */
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* ตั้งความยาวเส้น */
+.hamburger-icon span:nth-child(1) { width: 100%; }
+.hamburger-icon span:nth-child(2) { width: 16px; } /* เส้นกลางสั้น */
+.hamburger-icon span:nth-child(3) { width: 100%; }
+
+/* --- จังหวะเมื่อถูกคลิก (มีคลาส .active) --- */
+
+/* เปลี่ยนเป็นสีดำเพราะพื้นหลังเมนูมือถือคุณเป็นสีขาว */
+.nav-toggle.active .hamburger-icon span {
+  background-color: #ffffff; 
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
    /* --- Mobile Navigation --- */
 @media(max-width:768px){
@@ -49,29 +103,31 @@
   .nav-toggle{display:block;}
   .nav-menu{
     position:fixed;top:0;right:0;width:220px;height:100vh;
-    background:white;flex-direction:column;padding:0;gap:0;
+    background:rgb(0, 1, 49);flex-direction:column;padding:0;gap:0;
     transform:translateX(110%);transition:transform .3s cubic-bezier(.4,0,.2,1);
-    z-index:1001;border-left:1px solid var(--border);
-    box-shadow:-8px 0 32px rgba(0,0,0,0.1);
+    z-index:1001;
+    
   }
   .nav-menu.active{transform:translateX(0);}
   .nav-menu li{width:100%!important;margin:0!important;padding:0!important;list-style:none;}
   .mobile-exit-section{display:block;width:100%;}
   .btn-exit{
-    width:100%;height:58px;background:var(--blue);border:none!important;
+    width:100%;height:59px;background:var(--blue);border:none!important;
     display:flex;align-items:center;justify-content:center;gap:12px;
     color:#fff;font-family:'Prompt',sans-serif;font-size:14.5px;font-weight:400;
     cursor:pointer;-webkit-tap-highlight-color:transparent;
   }
-  .btn-exit svg{width:20px;height:20px;stroke:#fff;}
-  .btn-exit:active{background:rgba(29, 22, 131, 0.98);}
+  
+  
   .nav-menu a{
-    font-size:15px;font-weight:400;width:100%;display:flex;
-    align-items:center;justify-content:flex-start;padding:15px 0;
-    padding-left:25px!important;border-radius:0;text-decoration:none;
-    color:#4b5563;transition:all 0.2s;border-bottom:1px solid #f1f5f9;
+    font-size:15px;font-weight:00;width:100%;display:flex;
+    align-items:center;justify-content:center;padding:15px 0;
+   text-decoration:none;
+    color:#ffffff;transition:all 0.2s;
   }
-  .nav-menu a.active{background:#e6f1fb!important;color:#185FA5!important;font-weight:600!important;border-radius:0;}
+  .nav-menu a.active{font-size: 15px;
+  font-weight:100;
+  color: #deb974;}
   .hero{padding:80px 0 30px!important;margin-bottom:20px!important;}
   .hero-sub{font-size:15px!important;white-space:normal!important;letter-spacing:-0.4px!important;justify-content:center;display:flex;width:100%;}
 
@@ -406,8 +462,7 @@ footer {
       <ul class="nav-menu" id="navMenu">
         <li class="mobile-exit-section">
           <button class="btn-exit" onclick="closeMenu()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            <span>ปิดเมนู</span>
+         
           </button>
         </li>
         <li><a href="#">หน้าแรก</a></li>
@@ -416,8 +471,12 @@ footer {
         <li><a href="tel:0882692553">โทรสอบถาม</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
+  <div class="hamburger-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</button>
     </div>
   </nav>
 
@@ -551,22 +610,37 @@ footer {
     let galImages = [], galIndex = 0;
     let curFilter = 'all', curSort = 'default';
 
-    /* --- Navbar --- */
+  /* --- Navbar --- */
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
 
-    navToggle.addEventListener('click', e => { e.stopPropagation(); navMenu.classList.toggle('active'); });
-    document.addEventListener('click', e => {
-      if (!navMenu.contains(e.target) && navMenu.classList.contains('active')) navMenu.classList.remove('active');
+    // สั่งให้ทั้ง เมนู และ ปุ่มขยับ พร้อมกันเมื่อกด
+    navToggle.addEventListener('click', e => { 
+      e.stopPropagation(); 
+      navMenu.classList.toggle('active'); 
+      navToggle.classList.toggle('active'); // บรรทัดนี้ทำให้ปุ่มเปลี่ยนเป็น X
     });
-    function closeMenu() { navMenu.classList.remove('active'); }
 
+    // ฟังก์ชันสำหรับปิดทุกอย่าง (เมนูหายไป + ปุ่มกลับเป็น 3 ขีด)
+    function closeMenu() { 
+      navMenu.classList.remove('active'); 
+      navToggle.classList.remove('active'); 
+    }
+
+    // คลิกข้างนอกเมนูให้ปิด
+    document.addEventListener('click', e => {
+      if (!navMenu.contains(e.target) && !navToggle.contains(e.target) && navMenu.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+
+    // เมื่อคลิกรายการในเมนู ให้ปิดเมนูด้วย
     document.querySelectorAll('.nav-menu a').forEach(link => {
       link.addEventListener('click', e => {
         document.querySelectorAll('.nav-menu a').forEach(i => i.classList.remove('active'));
         link.classList.add('active');
         if (link.classList.contains('dropdown-trigger')) { e.stopPropagation(); return; }
-        navMenu.classList.remove('active');
+        closeMenu(); // เรียกใช้ฟังก์ชันปิดที่สร้างไว้ข้างบน
       });
     });
 
