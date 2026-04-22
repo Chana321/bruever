@@ -110,75 +110,6 @@
     /* ============================================================
        MOBILE NAV
     ============================================================ */
-    @media (max-width: 768px) {
-      .nav-container { padding: 0 16px; }
-      .logo-img { width: 45px; height: 45px; }
-      .logo-top { font-size: 12px; }
-      .logo-bottom { font-size: 15px; }
-
-      .nav-toggle { display: block; }
-
-      .nav-menu {
-        position: fixed; top: 0; right: 0;
-        width: 220px; height: 100vh;
-        background: rgb(0, 1, 49);
-        flex-direction: column;
-        padding: 0; gap: 0;
-        transform: translateX(110%);
-        transition: transform .3s cubic-bezier(.4,0,.2,1);
-        z-index: 1001;
-      }
-      .nav-menu.active { transform: translateX(0); }
-
-      .nav-menu li { width: 100%; margin: 0; padding: 0; list-style: none; }
-      .mobile-exit-section { display: block; width: 100%; }
-
-      .btn-exit {
-        width: 100%; height: 59px;
-        background: var(--blue); border: none;
-        display: flex; align-items: center; justify-content: center; gap: 12px;
-        color: #fff;
-        font-family: 'Prompt', sans-serif;
-        font-size: 14.5px; font-weight: 400;
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .nav-menu a {
-        font-size: 15px; font-weight: 400;
-        width: 100%;
-        display: flex; align-items: center; justify-content: center;
-        padding: 15px 0;
-        color: #ffffff;
-      }
-      .nav-menu a.active { color: #deb974; }
-
-      .hero { padding: 80px 0 30px !important; margin-bottom: 20px !important; }
-      .hero-sub {
-        font-size: 15px !important;
-        white-space: normal !important;
-        letter-spacing: -0.4px !important;
-        justify-content: center; display: flex; width: 100%;
-      }
-      .filters-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; align-items: center; margin-top: 10px; }
-      .desktop-only { display: none !important; }
-
-      .mobile-sort-btn {
-        display: flex; align-items: center; gap: 6px;
-        padding: 6px 16px; border-radius: 30px;
-        color: var(--blue);
-        font-family: 'Prompt', sans-serif;
-        font-size: 13px; cursor: pointer;
-        position: relative;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .mobile-sort-btn.active {
-        border-color: var(--blue); color: var(--blue);
-        background: var(--blue-light); font-weight: 500;
-      }
-      .mobile-sort-btn svg { width: 16px; height: 16px; }
-
-      .card-btn:hover { background:none; }
-    }
 
     @media (max-width: 360px) {
       .nav-logo { gap: 8px; }
@@ -264,7 +195,7 @@
 
     .card-img { position: relative; height: 190px; overflow: hidden; background: var(--blue-light); }
     .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .card-tag { position: absolute; top: 11px; left: 11px; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; }
+    .card-tag { position: absolute; top: 11px; left: 11px; font-size: 11px; font-weight: 550; padding: 3px 8px; border-radius: 20px; }
     .tag-house      { background: var(--blue-light);   color: var(--blue); }
     .tag-landhouse  { background: var(--green-light);  color: var(--green-dark); }
     .tag-large-land { background: var(--yellow-light); color: var(--yellow-dark); }
@@ -333,22 +264,30 @@
       background: rgba(0,0,0,0.58);
       display: none; align-items: center; justify-content: center;
       z-index: 9999; padding: 16px;
+      touch-action: none; 
+
     }
     .modal-overlay.open { display: flex; }
     .modal-box {
-      background: white; width: 100%; max-width: 660px;
-      border-radius: 22px; overflow: hidden;
-      animation: popIn .3s cubic-bezier(.22,.68,0,1.2);
-      max-height: 92vh;
-      display: flex; flex-direction: column;
-    }
+  background: white;
+  width: 100%;
+  max-width: 660px;
+  touch-action: auto;
+  border-radius: 20px 20px 8px 8px; 
+  overflow: hidden;
+  max-height: 92vh;
+   
+  display: flex;           /* เพิ่มบรรทัดนี้ */
+  flex-direction: column;  /* เพิ่มบรรทัดนี้ */
+  animation: popIn .3s cubic-bezier(.22,.68,0,1.2);
+}
     @keyframes popIn {
       from { transform: scale(0.88); opacity: 0; }
       to   { transform: scale(1);    opacity: 1; }
     }
 
     /* Gallery */
-    .modal-gallery { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; touch-action: pan-y; }
+    .modal-gallery { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; touch-action: pan-y; flex-shrink: 0;  }
     .gal-track { display: flex; height: 100%; transition: transform 0.7s cubic-bezier(.22,1,.36,1); }
     .gal-slide { flex: 0 0 100%; height: 100%; }
     .gal-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -379,14 +318,18 @@
     .modal-close:hover { background: white; }
 
     /* Modal body */
-    .modal-body    { padding: 22px 24px 26px; overflow-y: auto; }
+   .modal-body {
+   padding: 22px 24px 10px;
+   overflow-y: auto;        /* ให้เลื่อนแนวตั้งได้ */
+   flex: 1;                 /* ให้กินพื้นที่ส่วนกลางทั้งหมด *//* ให้เลื่อนในมือถือได้ลื่นไหล */
+   overscroll-behavior: contain;
+}
     .modal-tag-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
-    .modal-tag     { font-size: 11px; font-weight: 600; padding: 3px 12px; border-radius: 20px; }
-    .modal-title   { font-size: 21px; font-weight: 700; color: #0f172a; margin-bottom: 5px; line-height: 1.3; }
-    .modal-loc     { font-size: 13px; color: var(--gray); display: flex; align-items: center; gap: 4px; margin-bottom: 20px; }
+
+    .modal-loc     { font-size: 15px; color: rgb(41, 41, 41); display: flex; align-items: center; gap: 4px; margin-bottom: 10px; }
     .modal-loc svg { width: 13px; height: 13px; flex-shrink: 0; }
 
-    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; border-bottom: 2px solid #f1f1f1; padding-bottom: 20px; /* ตัวเส้นคั่น (ปรับสีได้ตามต้องการ) */ }
     .detail-item {
       background: #f8fafc; border: 1px solid #f1f5f9;
       border-radius: 10px; padding: 8px 12px;
@@ -394,18 +337,126 @@
     }
     .detail-label { font-size: 11px; color: #64748b; margin-bottom: -2px; }
     .detail-value { font-size: 15px; font-weight: 700; color: #1e293b; }
-    .detail-price .detail-value { color: #185FA5; font-size: 16px; }
+    .detail-price .detail-value { color:#1e293b; font-size: 16px; }
+
+    .modal-section-label { font-size: 14px; font-weight: 400; text-transform: uppercase; letter-spacing: .06em; color: #d1a655; margin-bottom: 8px;  }
+    .modal-desc-text     { font-size: 14px; color: #374151; line-height: 1.75; margin-bottom: 22px; white-space: pre-line;  }
+
+     @media (max-width: 768px) {
+
+      .modal-desc-text {
+    /* สั่งให้กระจายตัวอักษรให้เต็มบรรทัดหน้า-หลังเท่ากัน */
+     text-align: left;   
+    
+    /* คำสั่งเฉพาะเพื่อให้ภาษาไทยกระจายช่องไฟสวยงาม */
+   
+    
+    /* ป้องกันคำยาวๆ ทะลุขอบ และช่วยในการตัดคำ */
+   word-break: break-word;
+    
+   
+  }
+
+       .modal-box {
+    /* ล็อกความยาวตายตัวบนมือถือ เพื่อให้เริ่ม scroll ทันทีไม่ต้องรอเนื้อหาเต็ม */
+    height: 75vh; 
+   border-radius: 16px 16px 20px 20px; 
+    
+  }
+
+  .gal-btn {
+    width: 33px !important;    /* ขนาดความกว้างใหม่ */
+    height: 33px !important;   /* ขนาดความสูงใหม่ */
+    font-size: 16px !important; /* ขนาดลูกศรข้างใน */
+    background: rgba(255, 255, 255, 0.7) !important; /* ปรับให้จางลงเล็กน้อยไม่บังรูป */
+  }
+      
+      .nav-container { padding: 0 16px; }
+      .logo-img { width: 45px; height: 45px; }
+      .logo-top { font-size: 12px; }
+      .logo-bottom { font-size: 15px; }
+
+      .nav-toggle { display: block; }
+
+      .nav-menu {
+        position: fixed; top: 0; right: 0;
+        width: 220px; height: 100vh;
+        background: rgb(0, 1, 49);
+        flex-direction: column;
+        padding: 0; gap: 0;
+        transform: translateX(110%);
+        transition: transform .3s cubic-bezier(.4,0,.2,1);
+        z-index: 1001;
+      }
+      .nav-menu.active { transform: translateX(0); }
+
+      .nav-menu li { width: 100%; margin: 0; padding: 0; list-style: none; }
+      .mobile-exit-section { display: block; width: 100%; }
+
+      .btn-exit {
+        width: 100%; height: 59px;
+        background: var(--blue); border: none;
+        display: flex; align-items: center; justify-content: center; gap: 12px;
+        color: #fff;
+        font-family: 'Prompt', sans-serif;
+        font-size: 14.5px; font-weight: 400;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .nav-menu a {
+        font-size: 15px; font-weight: 400;
+        width: 100%;
+        display: flex; align-items: center; justify-content: center;
+        padding: 15px 0;
+        color: #ffffff;
+      }
+      .nav-menu a.active { color: #deb974; }
+
+      .hero { padding: 80px 0 30px !important; margin-bottom: 20px !important; }
+      .hero-sub {
+        font-size: 15px !important;
+        white-space: normal !important;
+        letter-spacing: -0.4px !important;
+        justify-content: center; display: flex; width: 100%;
+      }
+      .filters-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; align-items: center; margin-top: 10px; }
+      .desktop-only { display: none !important; }
+
+      .mobile-sort-btn {
+        display: flex; align-items: center; gap: 6px;
+        padding: 6px 16px; border-radius: 30px;
+        color: var(--blue);
+        font-family: 'Prompt', sans-serif;
+        font-size: 13px; cursor: pointer;
+        position: relative;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mobile-sort-btn.active {
+        border-color: var(--blue); color: var(--blue);
+        background: var(--blue-light); font-weight: 500;
+      }
+      .mobile-sort-btn svg { width: 16px; height: 16px; }
+
+      
+    }
 
     @media (max-width: 360px) {
       .detail-value { font-size: 13px; }
       .detail-price .detail-value { font-size: 14px; }
     }
 
-    .modal-section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--gray); margin-bottom: 7px; }
-    .modal-desc-text     { font-size: 14px; color: #374151; line-height: 1.75; margin-bottom: 22px; }
+   
 
     /* CTA buttons */
-    .modal-cta { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+    .modal-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 24px 20px; /* เพิ่ม padding ให้สวยงาม */
+  background: white;       /* พื้นหลังสีขาวกันเนื้อหาทะลุมาด้านหลัง */
+  border-top: 1px solid #f1f5f9; /* เส้นแบ่งบางๆ ให้ดูเป็นระเบียบ */
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.02); /* เงาด้านบนจางๆ */
+}
     .btn-cta {
       height: 45px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center; gap: 10px;
@@ -449,7 +500,7 @@
       padding: 0; overflow: hidden;
       outline: none; -webkit-tap-highlight-color: transparent; user-select: none;
     }
-    .fab-main img { width: 32px; height: 32px; object-fit: contain; }
+    .fab-main img { width: 40px; height: 40px; object-fit: contain; }
     .fab-main.active { transform: scale(1.1); background: #e9ecef; }
 
     .fab-mini {
@@ -466,7 +517,7 @@
     @media (max-width: 480px) {
       .fab-wrapper { bottom: 20px; right: 20px; gap: 8px; }
       .fab-main { width: 45px; height: 45px; }
-      .fab-main img { width: 33px; height: 33px; }
+      .fab-main img { width: 36px; height: 36px; }
       .fab-mini { width: 40px; height: 40px; }
       .fab-options { transform: translateY(20px) scale(0.6); gap: 8px; }
     }
@@ -535,46 +586,51 @@
        MODAL
   ============================================================ -->
   <div class="modal-overlay" id="detailModal" onclick="overlayClick(event)">
-    <div class="modal-box">
-      <div class="modal-gallery">
-        <button class="modal-close" onclick="closeDetail()">✕</button>
-        <div class="gal-track" id="galTrack"></div>
-        <button class="gal-btn gal-prev" onclick="galMove(-1)">‹</button>
-        <button class="gal-btn gal-next" onclick="galMove(1)">›</button>
-        <div class="gal-dots" id="galDots"></div>
+  <div class="modal-box">
+    <!-- 1. ส่วนรูปภาพ (อยู่กับที่ด้านบน) -->
+    <div class="modal-gallery">
+      <button class="modal-close" onclick="closeDetail()">✕</button>
+      <div class="gal-track" id="galTrack"></div>
+      <button class="gal-btn gal-prev" onclick="galMove(-1)">‹</button>
+      <button class="gal-btn gal-next" onclick="galMove(1)">›</button>
+      <div class="gal-dots" id="galDots"></div>
+    </div>
+
+    <!-- 2. ส่วนเนื้อหา (เลื่อนได้) -->
+    <div class="modal-body">
+      <div class="modal-tag-row">
+        <span class="modal-tag" id="modalTag"></span>
       </div>
-      <div class="modal-body">
-        <div class="modal-tag-row">
-          <span class="modal-tag" id="modalTag"></span>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-loc" id="modalLoc"></div>
+      <div class="detail-grid">
+        <div class="detail-item detail-price">
+          <div class="detail-label">ราคา</div>
+          <div class="detail-value" id="modalPrice"></div>
         </div>
-        <div class="modal-title" id="modalTitle"></div>
-        <div class="modal-loc"   id="modalLoc"></div>
-        <div class="detail-grid">
-          <div class="detail-item detail-price">
-            <div class="detail-label">ราคา</div>
-            <div class="detail-value" id="modalPrice"></div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">เนื้อที่</div>
-            <div class="detail-value" id="modalArea"></div>
-          </div>
-        </div>
-        <div class="modal-section-label">รายละเอียด</div>
-        <div class="modal-desc-text" id="modalDesc"></div>
-        <div class="modal-cta">
-          <a href="#" target="_blank" id="btnFB" class="btn-cta btn-fb">
-            <img src="img/other/face-icon.png" alt="Facebook" class="cta-icon-img">
-            <span>ดูรายละเอียดบน Facebook</span>
-          </a>
-          <a href="#" target="_blank" id="btnMap" class="btn-cta btn-map">
-            <img src="img/other/maps-icon.png" alt="Google Maps" class="cta-icon-img">
-            <span>เปิดแผนที่ Google Maps</span>
-          </a>
-       
+        <div class="detail-item">
+          <div class="detail-label">เนื้อที่</div>
+          <div class="detail-value" id="modalArea"></div>
         </div>
       </div>
+      <div class="modal-section-label">รายละเอียด</div>
+      <div class="modal-desc-text" id="modalDesc"></div>
+      <!-- ย้าย modal-cta ออกจากตรงนี้ -->
+    </div>
+
+    <!-- 3. ส่วนปุ่ม (ยึดอยู่กับที่ด้านล่าง) -->
+    <div class="modal-cta">
+      <a href="#" target="_blank" id="btnFB" class="btn-cta btn-fb">
+        <img src="img/other/face-icon.png" alt="Facebook" class="cta-icon-img">
+        <span>ดูรายละเอียดบน Facebook</span>
+      </a>
+      <a href="#" target="_blank" id="btnMap" class="btn-cta btn-map">
+        <img src="img/other/maps-icon.png" alt="Google Maps" class="cta-icon-img">
+        <span>เปิดแผนที่ Google Maps</span>
+      </a>
     </div>
   </div>
+</div>
 
   <!-- ============================================================
        HERO
@@ -740,16 +796,14 @@
 
       requestAnimationFrame(() => { document.querySelector('.modal-body').scrollTop = 0; });
 
-      document.getElementById('modalTitle').textContent = d.title;
+      
       document.getElementById('modalPrice').textContent = d.price + ' บาท';
       document.getElementById('modalArea').textContent  = d.area;
       document.getElementById('modalDesc').textContent  = d.desc;
       document.getElementById('modalLoc').innerHTML =
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>${d.loc}`;
 
-      const tagEl = document.getElementById('modalTag');
-      tagEl.className = `modal-tag tag-${d.type}`;
-      tagEl.textContent = d.tag || typeMap[d.type] || 'ไม่ระบุ';
+      
 
       const mapBtn = document.getElementById('btnMap');
       mapBtn.style.display = d.map ? 'flex' : 'none';
@@ -761,11 +815,21 @@
 
       document.getElementById('detailModal').classList.add('open');
       document.body.style.overflow = 'hidden';
+
+       document.getElementById('detailModal').classList.add('open');
+  
+  // ล็อกทั้งหน้าเว็บ (สำคัญมาก)
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
     }
+
+    
 
     function closeDetail() {
       document.getElementById('detailModal').classList.remove('open');
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+  document.body.style.overflow = '';
     }
 
     function overlayClick(e) {
@@ -803,8 +867,8 @@
 
     /* ---- Data ---- */
     const DATA = [
-      { title:'ติดถนนเส้น แม่ทะ-บ้านกล้วย', img:'img/44.webp', map:'https://maps.app.goo.gl/fDf4KGpGXNbWGr36A', fbPost:'https://www.facebook.com/share/p/1C9EVoUgHa/', loc:'อ.เมือง ลำปาง', priceNum:290000, price:'290,000', type:'landhouse', area:'74 ตร.ว.', desc:'ที่ดินทำเลดี ติดถนนสายหลักแม่ทะ–บ้านกล้วย เหมาะสำหรับสร้างบ้านพักอาศัย การเดินทางสะดวก ใกล้ชุมชน ราคาพิเศษ', gallery:['img/1/3.webp','img/1/1.webp','img/1/2.webp'] },
-      { title:'หมู่บ้านเด่นสโรชา', img:'img/88.webp', map:'https://maps.app.goo.gl/v6auFGytfLS6wrFo6', fbPost:'https://www.facebook.com/share/p/1CdLrD8f8Q/', loc:'ต.พิชัย อ.เมือง ลำปาง', priceNum:450000, price:'450,000', type:'landhouse', area:'99 ตร.ว.', desc:'บ้านสวยมือสอง สภาพดีพร้อมอยู่ ทำเลทองใจกลางเมือง ติดถนนสายหลัก เดินทางสะดวกทุกทิศทาง', gallery:['img/2/1.webp','img/2/2.webp'] },
+      { title:'ติดถนนเส้น แม่ทะ-บ้านกล้วย', img:'img/44.webp', map:'https://maps.app.goo.gl/fDf4KGpGXNbWGr36A', fbPost:'https://www.facebook.com/share/p/1C9EVoUgHa/', loc:'ต.กล้วยแพะ อ.เมือง ลำปาง', priceNum:290000, price:'290,000', type:'landhouse', area:'74 ตร.ว.', desc:'ที่ดินทำเลดี เนื้อที่ 74 ตร.ว หน้ากว้าง 40 เมตร  ติดถนนสายหลักแม่ทะ–บ้านกล้วย เดินทางสะดวกรถสัญจรผ่านตลอด \n\n- ลงตัวทั้งปลูกบ้าน/ทำธุรกิจ หรือเก็งกำไรในอนาคต \n - ราคาเพียง 290,000 บาท (ราคานี้รวมโอน) ', gallery:['img/1/3.webp','img/1/1.webp','img/1/2.webp'] },
+      { title:'หมู่บ้านเด่นสโรชา', img:'img/88.webp', map:'https://maps.app.goo.gl/v6auFGytfLS6wrFo6', fbPost:'https://www.facebook.com/share/p/1CdLrD8f8Q/', loc:'ต.พิชัย อ.เมือง ลำปาง', priceNum:450000, price:'450,000', type:'landhouse', area:'99 ตร.ว.', desc:'ที่ดินราคาดี (อยู่ในหมู่บ้านเด่นสโรชา) เนื้อที่ 99 ตร.ว บรรยากาศเงียบสงบเหมาะสำหรับปลูกบ้านอยู่อาศัย \n\n- หน้ากว้าง 20 เมตร ลึก 19 เมตร \n- น้ำประปา/ไฟฟ้า/ถนนลาดยางครบ \n- เดินทางเข้าออกสะดวกเข้าตัวเมืองแค่ 7 นาที', gallery:['img/2/1.webp','img/2/2.webp'] },
       { title:'ตรงข้ามบ้านต้นมื่น', img:'img/10.webp', map:'https://maps.app.goo.gl/qoZpMRGMmEssacUX7', fbPost:'https://www.facebook.com/share/r/1KHfHwnh14/', loc:'ต.พิชัย อ.เมือง ลำปาง', priceNum:450000, price:'450,000', type:'landhouse', area:'84 ตร.ว.', desc:'ที่ดินแปลงใหญ่ ติดริมแม่น้ำวัง วิวสวยงามมาก บรรยากาศเงียบสงบ เหมาะสำหรับสร้างบ้านสวนริมน้ำ หรือลงทุน', gallery:['img/10.png','img/3/1.webp'] },
       { title:'พรประสิทธิ์ซอย 4', img:'img/11.webp', map:'https://maps.app.goo.gl/kmFYBmS5oXuTw88Q9', fbPost:'https://www.facebook.com/share/p/18E711mM6s/', loc:'ต.บ่อแฮ้ว อ.เมือง ลำปาง', priceNum:890000, price:'890,000', type:'landhouse', area:'107 ตร.ว.', desc:'ที่ดินวิวธรรมชาติสวยงาม บรรยากาศเงียบสงบ เหมาะสำหรับสร้างบ้านพักอาศัย', gallery:['img/4/1.webp','img/4/2.webp'] },
       { title:'ใกล้บ้านศรีสง่า', img:'img/14.webp', map:'https://maps.app.goo.gl/s1cPxfjVnTSGaHTX6', fbPost:'https://www.facebook.com/share/p/1PKhFC3XpN/', loc:'ต.ต้นธงชัย อ.เมือง ลำปาง', priceNum:450000, price:'450,000', type:'landhouse', area:'100 ตร.ว.', desc:'ราคาดีที่สุดในย่านแม่ทะ ทางเข้าออกสะดวก ใกล้ถนนสายหลัก เหมาะสร้างบ้าน', gallery:['img/5/1.webp','img/5/2.webp'] },
