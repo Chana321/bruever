@@ -104,6 +104,8 @@
     .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     .mobile-exit-section { display: none; list-style: none; width: 100%; }
+    .sort-select:hover { border-color: var(--blue-mid); }
+    .mobile-sort-btn { display: none; } /* hidden on desktop */
 
     /* ============================================================
        MOBILE NAV
@@ -174,6 +176,8 @@
         background: var(--blue-light); font-weight: 500;
       }
       .mobile-sort-btn svg { width: 16px; height: 16px; }
+
+      .card-btn:hover { background:none; }
     }
 
     @media (max-width: 360px) {
@@ -222,6 +226,7 @@
     .chip:hover { border-color: rgb(3,3,148); color: rgb(3,3,148); }
     .chip.active { background: var(--blue); color: white; border-color: var(--blue); box-shadow: 0 4px 14px rgba(24,95,165,0.3); }
 
+
     @media (min-width: 768px) {
       .chip { flex: 0 0 auto; padding: 7px 18px; }
     }
@@ -241,9 +246,7 @@
       background: var(--blue); color: white;
       cursor: pointer; outline: none; transition: all 0.2s;
     }
-    .sort-select:hover { border-color: var(--blue-mid); }
-    .mobile-sort-btn { display: none; } /* hidden on desktop */
-
+   
     /* ============================================================
        GRID & CARDS
     ============================================================ */
@@ -357,7 +360,7 @@
       font-size: 20px; display: flex; align-items: center; justify-content: center;
       transition: background .15s; color: #0f172a; z-index: 2;
     }
-    .gal-btn:hover { background: white; }
+    
     .gal-prev { left: 12px; }
     .gal-next { right: 12px; }
 
@@ -415,12 +418,13 @@
     .btn-cta:active { transform: scale(0.98); }
     .btn-fb           { background: #065dcf; color: white !important; }
     .btn-map          { background: #0F172A; color: white !important; }
-    .btn-close-modal  { background: #f1f5f9; color: #64748b !important; font-weight: 400; }
+    
 
     @media (min-width: 600px) {
       .modal-cta { flex-direction: row; flex-wrap: wrap; }
       .btn-fb, .btn-map { flex: 1; }
-      .btn-close-modal  { width: 100%; }
+      
+    
     }
 
     /* ============================================================
@@ -566,7 +570,7 @@
             <img src="img/other/maps-icon.png" alt="Google Maps" class="cta-icon-img">
             <span>เปิดแผนที่ Google Maps</span>
           </a>
-          <button class="btn-cta btn-close-modal" onclick="closeDetail()">ปิดหน้านี้</button>
+       
         </div>
       </div>
     </div>
