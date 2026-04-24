@@ -343,8 +343,7 @@
     .modal-desc-text     { font-size: 14px; color: #374151; line-height: 1.75; margin-bottom: 22px; white-space: pre-line;  }
 
      @media (max-width: 768px) {
- 
-      .card-btn:hover { background: none; color: white; border-color: none; }
+
      
 
       .modal-desc-text {
@@ -360,13 +359,14 @@
    
   }
 
-    .modal-box {
-    /* ให้กล่องขยายตามเนื้อหา ไม่หดเมื่อ toolbar Safari โผล่ */
-    height: auto;
-    min-height: 75dvh;
-    max-height: 92dvh;
-    border-radius: 16px 16px 20px 20px;
-}
+       .modal-box {
+    /* ล็อกความยาวตายตัวบนมือถือ เพื่อให้เริ่ม scroll ทันทีไม่ต้องรอเนื้อหาเต็ม */
+
+     height: auto;
+    height: 75vh; 
+   border-radius: 16px 16px 20px 20px; 
+    
+  }
 
   .gal-btn {
     width: 33px !important;    /* ขนาดความกว้างใหม่ */
