@@ -971,8 +971,20 @@
 
     /* Preload card thumbnails after page load */
     window.addEventListener('load', () => {
-      DATA.forEach(item => { if (item.img) new Image().src = item.img; });
-    });
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+  if (isMobile) {
+    // มือถือ → โหลด 6 ตัวแรกก่อน แล้วรอ 3 วิค่อยโหลดที่เหลือ
+    DATA.slice(0, 6).forEach(item => { new Image().src = item.img; });
+    setTimeout(() => {
+      DATA.slice(6).forEach(item => { new Image().src = item.img; });
+    }, 3000);
+
+  } else {
+    // Desktop → โหลดทั้งหมดได้เลย เครื่องแรงพอ
+    DATA.forEach(item => { new Image().src = item.img; });
+  }
+});
 
     /* ---- Chip filter ---- */
     document.querySelectorAll('.chip').forEach(c =>
